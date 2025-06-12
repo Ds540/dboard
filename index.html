@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard: Pogoda i Zegar</title>
+  <style>
+    body {
+      background-color: #000; /* całkowicie czarne tło */
+      color: #eee;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+    #clock {
+      font-size: 64px;
+      background: #141414;
+      padding: 40px 60px;
+      border-radius: 15px;
+      text-align: center;
+      user-select: none;
+      box-shadow: 0 0 15px #000;
+      min-width: 250px;
+    }
+    .maps-container {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+    }
+    iframe {
+      border: none;
+      width: 800px;
+      height: 600px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px #000;
+    }
+    h1 {
+      margin-bottom: 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Dashboard: Pogoda i Zegar</h1>
+
+  <!-- Zegar nad mapami -->
+  <div id="clock"></div>
+
+  <!-- Mapy poniżej -->
+  <div class="maps-container">
+    <iframe 
+	width="800" 
+	height="600" 
+	src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=mm&metricTemp=°C&metricWind=m/s&zoom=11&overlay=wind&product=ecmwf&level=surface&lat=49.9&lon=21.837&detailLat=49.94&detailLon=21.837&detail=true" 
+	frameborder="0"></iframe>
+	</iframe>
+
+    <!-- Mapa 2: Jastrzebie -->
+    <iframe 
+	width="800" 
+	height="600" 
+	src="https://embed.windy.com/embed.html?type=map&location=coordinates&metricRain=default&metricTemp=default&metricWind=default&zoom=11&overlay=wind&product=ecmwf&level=surface&lat=49.912&lon=18.602&detailLat=49.952&detailLon=18.602&detail=true" 
+	frameborder="0">
+	</iframe>
+  </div>
+
+  <script>
+    function updateClock() {
+      const now = new Date();
+      const hours = now.getHours().toString().padStart(2,'0');
+      const minutes = now.getMinutes().toString().padStart(2,'0');
+      const seconds = now.getSeconds().toString().padStart(2,'0');
+      document.getElementById('clock').textContent = `${hours}:${minutes}:${seconds}`;
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+  </script>
+
+</body>
+</html>
